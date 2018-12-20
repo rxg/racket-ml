@@ -70,12 +70,12 @@
   (define L (array->flarray (cholesky covariance)))
 
   (: sample : (Sample [Matrix Flonum]))
-  (define (sample [samples #f])
-    (if samples
-        (for/list: : [Listof [Matrix Flonum]]
+  (define sample
+    (case-lambda:
+      [() (matrix+ mean (matrix* L (base-mvn (square-matrix-size covariance))))]
+      [(samples) (for/list: : [Listof [Matrix Flonum]]
                    ([i (in-range 0 samples)])
-          (matrix+ mean (matrix* L (base-mvn (square-matrix-size covariance)))))
-        (matrix+ mean (matrix* L (base-mvn (square-matrix-size covariance))))))
+          (matrix+ mean (matrix* L (base-mvn (square-matrix-size covariance)))))]))
 
   sample)
 
