@@ -61,7 +61,7 @@
 
   (for*/fold: : [Matrix Real]
               ([L : [Matrix Real] (build-cholesky-column A
-                                                         (make-matrix 0 0 0)
+                                                         (make-matrix 1 1 0)
                                                          0
                                                          n)])
               ([k : Natural (in-range 1 n)])
